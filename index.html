@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container my-5">
+        <!-- #44 -->
         <h2 class="display-2">#44 window.location</h2>
         <hr>
         <div class="btnBox">
@@ -25,6 +26,49 @@
             <a href="#" id="btn8">下一頁</a>
         </div>
         <div class="show"></div>
+        <hr>
+        <!-- #45 -->
+        <h2 class="display-2">#45</h2>
+        <h3 class="display-3">題目：透過 JS 轉址</h3>
+        <div class="btnBox">
+            <button class="google">連到 Google</button>
+            <button class="yahoo">連到 Yahoo</button>
+        </div>
+        <hr>
+        <!-- #46 -->
+        <h2 class="display-2">#46</h2>
+        <h3 class="display-3">題目一：抓取 data-id 的值後進行轉址</h3>
+        <div class="btnBox">
+            <button class="Tom" data-id="tom">Tom 推薦六角學院</button>
+            <button class="John" data-id="John">John 推薦六角學院</button>
+        </div>
+        <pre class="pre-scrollable">
+const hexSchool = 'https://www.hexschool.com/'
+const Tom = getElemt('.Tom')
+const John = getElemt('.John')
+function getDataId (item){
+    return item.getAttribute('data-id')
+}
+Tom.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(Tom)}`
+})
+John.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(John)}`
+})</pre>
+        <h3 class="display-3">題目二：透過 JS 取出 recommend 的值</h3>
+        <div class="btnBox">
+            <button id="addCmd">先加上 recommend</button>
+            <button id="getValue">再取得 query 值</button>
+        </div>
+        <div class="ans46"></div>
+        <pre class="pre-scrollable">
+getElemt('#addCmd').addEventListener('click', () => {
+    location.href = location.pathname + `?recommend=Erica`
+})
+getElemt('#getValue').addEventListener('click', () => {
+    const url = location.search.split('?recommend=')[1]
+    getElemt('.ans46').innerHTML = url
+})</pre>
     </div>
 </body>
 </html>

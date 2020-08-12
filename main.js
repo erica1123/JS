@@ -41,3 +41,37 @@ btn(8).addEventListener('click', (e) => {
     // window.history.go(1)
     window.history.forward()
 })
+
+// #45
+getElemt('.google').addEventListener('click', (e) => {
+    let url = 'https://www.google.com/'
+    // window.open(url) // 另開新分頁
+    location.assign(url)
+})
+getElemt('.yahoo').addEventListener('click', (e) => {
+    let url = 'https://tw.yahoo.com/'
+    location.assign(url)
+})
+
+// #46-1
+const hexSchool = 'https://www.hexschool.com/'
+const Tom = getElemt('.Tom')
+const John = getElemt('.John')
+function getDataId (item){
+    return item.getAttribute('data-id')
+}
+Tom.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(Tom)}`
+})
+John.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(John)}`
+})
+
+// #46-2
+getElemt('#addCmd').addEventListener('click', () => {
+    location.href = location.pathname + `?recommend=Erica`
+})
+getElemt('#getValue').addEventListener('click', () => {
+   const url = location.search.split('?recommend=')[1]
+   getElemt('.ans46').innerHTML = url
+})
