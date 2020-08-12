@@ -1,0 +1,41 @@
+body {
+    background: #EEE;
+}
+
+.container {
+    background: #FFF;
+    min-height: 60vh;
+    padding: 20px 30px;
+}
+
+.display-2 {
+    font-size: 28px;
+    font-weight: 400;
+}
+.btnBox {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.btnBox a {
+    background: #27c9db;
+    color: #FFF;
+    padding: 10px 3%;
+    margin: 0 0 1% 1%;
+    text-decoration: none;
+    transition: all .15s;
+}
+
+.btnBox a:hover {
+    background: #00a9c6;
+    color: #FFF;
+}
+
+
+.show {
+    padding: 20px 0;
+}
+
+.show span {
+    color: #ff2e6c;
+}
