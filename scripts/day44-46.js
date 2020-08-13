@@ -1,8 +1,5 @@
-const getElemt = (el) => {
-    return document.querySelector(el)
-}
+// #44
 const show = getElemt('.show')
-
 function btn (i){
     return getElemt(`#btn${i}`)
 }

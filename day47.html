@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 特訓班</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" defer>
+    <link rel="stylesheet" href="style.css" defer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/day47.js" defer></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- menu -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="./" class="navbar-brand">JS特訓班</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="day44-46.html">Day44-46</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="day47.html">Day47</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-3 mb-5">
+        <!-- #47 -->
+        <h2 class="display-2">#47 AJAX POST</h2>
+        <h3 class="display-3">範例一：xmlhttprequest</h3>
+        <div class="ans47 xhr mt-4">
+            <pre class="pre-scrollable">
+function postAjax (mail, psw){
+    const xhr = new XMLHttpRequest()
+    let data = `email=${mail}&password=${psw}`
+    let msg = getElemt('.xhr .form')
+    xhr.open('post', url) 
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+    xhr.send(data)
+    xhr.onload = () => {
+        let str = JSON.parse(xhr.responseText)
+        if (str.success == true) {
+            msg.innerHTML += `${str.message}` // 自行加上 HTML 內容
+        } else {
+            msg.innerHTML += `${str.message}` // 自行加上 HTML 內容
+        }
+    }
+}
+
+getElemt('#singup1').addEventListener('click', () => {
+    let mail = getElemt('#email_xhr').value
+    let psw = getElemt('#password_xhr').value
+    postAjax(mail, psw)
+})</pre>
+            <div class="form ml-4">
+                <label for="email_xhr" class="sr-only">Email address</label>
+                <input type="email" id="email_xhr" class="form-control mb-2" placeholder="Email address">
+                <label for="password_xhr" class="sr-only">Password</label>
+                <input type="password" id="password_xhr" class="form-control" placeholder="Password">
+                <button class="btn btn-primary my-3" id="singup1" type="submit">註冊</button>
+            </div>
+        </div>
+
+        <h3 class="display-3">範例二：Fetch</h3>
+        <div class="ans47 fetch mt-4">
+            <pre class="pre-scrollable">
+function fetchAjax (mail, psw){
+    let msg = getElemt('.fetch .form')
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'  
+        },
+        body: JSON.stringify({
+            email: mail,
+            password: psw
+        })
+    }).then( reponse => {
+        return reponse.json()
+    }).then( res => {
+        if( res.success ) {
+            msg.innerHTML += `${res.message}` // 自行加上 HTML 內容
+        } else {
+            msg.innerHTML += `${res.message}` // 自行加上 HTML 內容
+        }
+    }).catch( error => {
+        console.log(error)
+    })
+}
+
+getElemt('#singup2').addEventListener('click', () => {
+    let mail = getElemt('#email_fetch').value
+    let psw = getElemt('#password_fetch').value
+    fetchAjax(mail, psw)</pre>
+            <div class="form ml-4">
+                <label for="email_fetch" class="sr-only">Email address</label>
+                <input type="email" id="email_fetch" class="form-control mb-2" placeholder="Email address">
+                <label for="password_fetch" class="sr-only">Password</label>
+                <input type="password" id="password_fetch" class="form-control" placeholder="Password">
+                <button class="btn btn-primary my-3" id="singup2" type="submit">註冊</button>
+            </div>
+        </div>
+
+        <h3 class="display-3">範例三：axios</h3>
+        <div class="ans47 axios mt-4">
+            <pre class="pre-scrollable">
+function axiosAjax (mail, psw){
+    let msg = getElemt('.axios .form')
+    let data = {
+        email: mail,
+        password: psw
+    }
+    axios.post(url, data).then( res => {
+        if( res.data.success ) {
+            msg.innerHTML += `${res.data.message}` // 自行加上 HTML 內容
+        } else {
+            msg.innerHTML += `${res.data.message}` // 自行加上 HTML 內容
+        }
+    }).catch( error => {
+        console.log(error)
+    })
+}
+getElemt('#singup3').addEventListener('click', () => {
+    let mail = getElemt('#email_axios').value
+    let psw = getElemt('#password_axios').value
+    axiosAjax(mail, psw)
+})</pre>
+            <div class="form ml-4">
+                <label for="email_axios" class="sr-only">Email address</label>
+                <input type="email" id="email_axios" class="form-control mb-2" placeholder="Email address">
+                <label for="password_axios" class="sr-only">Password</label>
+                <input type="password" id="password_axios" class="form-control" placeholder="Password">
+                <button class="btn btn-primary my-3" id="singup3" type="submit">註冊</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

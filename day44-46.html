@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 特訓班</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" defer>
+    <link rel="stylesheet" href="style.css" defer>
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/day44-46.js" defer></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- menu -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a href="./" class="navbar-brand">JS特訓班</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="day44-46.html">Day44-46</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="day47.html">Day47</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container mt-3 mb-5">
+        <!-- #44 -->
+        <h2 class="display-2">#44 window.location</h2>
+        <div class="btnBox">
+            <a href="#" id="btn1">完整網址</a>
+            <a href="#" id="btn2">主機名稱</a>
+            <a href="#" id="btn3">網域名稱</a>
+            <a href="#" id="btn4">路徑名稱</a>
+            <a href="#" id="btn5">網址後的query值</a>
+        </div>
+        <div class="btnBox">
+            <a href="#" id="btn6">重新整理</a>
+            <a href="#" id="btn7">上一頁</a>
+            <a href="#" id="btn8">下一頁</a>
+        </div>
+        <div class="show"></div>
+        <hr>
+        <!-- #45 -->
+        <h2 class="display-2">#45</h2>
+        <h3 class="display-3">題目：透過 JS 轉址</h3>
+        <div class="btnBox">
+            <button class="google">連到 Google</button>
+            <button class="yahoo">連到 Yahoo</button>
+        </div>
+        <hr>
+        <!-- #46 -->
+        <h2 class="display-2">#46</h2>
+        <h3 class="display-3">題目一：抓取 data-id 的值後進行轉址</h3>
+        <div class="btnBox">
+            <button class="Tom" data-id="tom">Tom 推薦六角學院</button>
+            <button class="John" data-id="John">John 推薦六角學院</button>
+        </div>
+        <pre class="pre-scrollable">
+const hexSchool = 'https://www.hexschool.com/'
+const Tom = getElemt('.Tom')
+const John = getElemt('.John')
+function getDataId (item){
+    return item.getAttribute('data-id')
+}
+Tom.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(Tom)}`
+})
+John.addEventListener('click', function(){
+    location.href = `${hexSchool}?recommend=${getDataId(John)}`
+})</pre>
+        <h3 class="display-3">題目二：透過 JS 取出 recommend 的值</h3>
+        <div class="btnBox">
+            <button id="addCmd">先加上 recommend</button>
+            <button id="getValue">再取得 query 值</button>
+        </div>
+        <div class="ans46"></div>
+        <pre class="pre-scrollable">
+getElemt('#addCmd').addEventListener('click', () => {
+    location.href = location.pathname + `?recommend=Erica`
+})
+getElemt('#getValue').addEventListener('click', () => {
+    const str = location.search.split('?recommend=')[1]
+    getElemt('.ans46').innerHTML = str
+})</pre>
+    </div>
+</body>
+</html>
