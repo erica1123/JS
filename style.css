@@ -35,13 +35,25 @@ body {
 
 .btnBox a:hover, button:hover {
     background: #0094ba;
-    color: #FFF;
 }
 
-.btnBox a:focus, .btnBox button:focus {
+.btnBox a:focus, button:focus {
     outline: none;
     border: none;
     background: #0094ba;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.navbar-toggler {
+    border: 0;
+}
+
+.navbar-toggler:hover, .navbar-toggler:focus {
+    background: #F5F5F5;
+    border: 0;
 }
 
 .btnBox + h3 {
