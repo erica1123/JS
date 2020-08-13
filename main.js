@@ -72,6 +72,6 @@ getElemt('#addCmd').addEventListener('click', () => {
     location.href = location.pathname + `?recommend=Erica`
 })
 getElemt('#getValue').addEventListener('click', () => {
-   const url = location.search.split('?recommend=')[1]
-   getElemt('.ans46').innerHTML = url
+   const str = location.search.split('?recommend=')[1]
+   getElemt('.ans46').innerHTML = str
 })
