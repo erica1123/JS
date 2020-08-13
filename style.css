@@ -18,12 +18,9 @@ body {
     display: block;
     /* background: #f3f3f3; */
 }
-.btnBox {
-    display: flex;
-    justify-content: flex-start;
-    /* flex-wrap: wrap; */
-}
+
 .btnBox a, .btnBox button {
+    display: inline-block;
     background: #27c9db;
     color: #FFF;
     padding: 10px 20px;
