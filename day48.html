@@ -119,7 +119,7 @@ function checkFunc(e) {
     // 切換狀態
     if (!chk) {
         msg.classList.add('alert-danger')
-        msg.innerHTML = str.join('<br>')
+        msg.innerHTML = str.join('') // 加上br換行
     } else {
         msg.classList.remove('alert-danger')
         msg.innerHTML = ''
