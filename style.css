@@ -99,7 +99,7 @@ body {
 }
 
 .form-sign .form + .form {
-    margin-left: 20px
+    margin-left: 20px;
 }
 
 .form-sign .btnBox {
@@ -111,4 +111,17 @@ body {
 
 .form-sign + .pre-scrollable  {
     max-height: 100%;
+}
+
+@media  (max-width: 640px) {
+    .form-sign {
+        flex-flow: column;
+    }
+    .form-sign .form {
+        width: 100%;
+    }
+    .form-sign .form + .form {
+        margin: 0;
+        margin-top: 20px;
+    }
 }
