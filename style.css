@@ -1,6 +1,6 @@
-* {
-    /* outline: 1px solid red; */
-}
+/* * {
+    outline: 1px solid red;
+} */
 body {
     background: #EEE;
 }
@@ -18,7 +18,6 @@ body {
     font-size: 18px;
     font-weight: 400;
     display: block;
-    /* background: #f3f3f3; */
 }
 
 .btnBox a, button {
@@ -60,7 +59,6 @@ body {
     margin-top: 3%;
 }
 
-
 .show {
     padding: 20px 0;
 }
@@ -83,4 +81,24 @@ body {
 }
 .ans47 .form {
     width: 60%;
+}
+
+.form-sign {
+    max-width: 350px;
+    padding: 20px;
+    margin: 0 auto 20px;
+    background: #F5F5F5;
+    border-radius: 5px;
+    border: 1px solid #DDD;
+}
+
+.form-sign .btnBox {
+    text-align: center;
+}
+.form-sign .btnBox button {
+    width: 40%;
+}
+
+.form-sign + .pre-scrollable  {
+    max-height: 100%;
 }
