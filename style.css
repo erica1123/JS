@@ -84,12 +84,22 @@ body {
 }
 
 .form-sign {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-sign .form {
+    width: 50%;
     max-width: 350px;
     padding: 20px;
-    margin: 0 auto 20px;
     background: #F5F5F5;
     border-radius: 5px;
     border: 1px solid #DDD;
+}
+
+.form-sign .form + .form {
+    margin-left: 20px
 }
 
 .form-sign .btnBox {

@@ -1,85 +1,114 @@
 // #48
-const signUpBtn = getElemt('#signUpBtn')
-const signInBtn = getElemt('#signInBtn')
-const mail = getElemt('.email')
-const psw = getElemt('.password')
-const msg = getElemt('.alert')
+const signUp = getElemt('#signUp')
+const signIn = getElemt('#signIn')
 const ints = document.querySelectorAll('input')
-const signupURL = 'https://hexschool-tutorial.herokuapp.com/api/signup'
-const signinURL = 'https://hexschool-tutorial.herokuapp.com/api/signin'
+const url = 'https://hexschool-tutorial.herokuapp.com/api/'
+let data = {}
+let chk = []
+let str = []
+let msg = ''
 
-function postAjax (url){
-    axios.post(url, {
-        email: mail.value,
-        password: psw.value
+function postAjax (act){
+    axios.post(`${url + act}`, {
+        email: data.mail,
+        password: data.psw
     }).then(res => {
+        let info = data.msg
         if ( res.data.success ){
-            if (url === signupURL) {
-                msg.classList.add('alert-success')
-            } else {
-                msg.classList.add('alert-info')
-            }
-            msg.innerHTML = res.data.message
+            info.innerHTML += res.data.message
+            info.classList.add('alert-success')
             ints.forEach( item => {
                 item.value = ''
             })
         } else {
-            msg.classList.add('alert-danger')
-            msg.innerHTML = res.data.message
+            info.innerHTML += res.data.message
+            info.classList.add('alert-danger')
         }
     }).catch(err => {
         console.log(err.data)
     })
 }
 
-function checkFunc(e) {
-    chkmail = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
-    chkpsw = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{0,20}$/
-    isMail = mail.value.trim()
-    isPsw = psw.value.trim()
-    chk = true
-    str = []
-    
-    // Email 驗證
-    if( isMail == '' || !chkmail.exec(isMail) ) {
+// Email 驗證
+function chkmail (item){
+    let rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+    let isValue = item.value.trim()
+    if( isValue == '' || !rule.exec(isValue) ) {
         str.push('Email 格式錯誤') 
-        chk = false
-        mail.classList.add('is-invalid')
+        chk[0] = false
+        item.classList.add('is-invalid')
     } else {
-        chk = true
-        mail.classList.remove('is-invalid')
-    }
-    
-    // Password 驗證
-    if ( isPsw == '' || !chkpsw.exec(isPsw) ) {
-        str.push('須包含數字和英文字母')
-        chk = false
-        psw.classList.add('is-invalid')
-    } else {
-        chk = true
-        psw.classList.remove('is-invalid')
-    }
-    
-    // 切換狀態
-    if (!chk) {
-        msg.classList.add('alert-danger')
-        msg.innerHTML = str.join('<br>')
-    } else {
-        msg.classList.remove('alert-danger')
-        msg.innerHTML = ''
-        msg.classList = 'alert'
-
-        // 判斷按鈕
-        if (e.target == signUpBtn) {
-            postAjax(signupURL)
-        } else if (e.target == signInBtn) {
-            postAjax(signinURL)
-        }
+        chk[0] = true
+        item.classList.remove('is-invalid')
     }
 }
 
-signUpBtn.addEventListener('click', checkFunc)
-signInBtn.addEventListener('click', checkFunc)
+// Password 驗證
+function chkpsw (item){
+    let rule = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{0,20}$/
+    let isValue = item.value.trim()
+    if ( isValue == '' || !rule.exec(isValue) ) {
+        str.push('密碼須包含數字和英文字母')
+        chk[1] = false
+        item.classList.add('is-invalid')
+    } else {
+        chk[1] = true
+        item.classList.remove('is-invalid')
+    }
+}
+
+// 切換狀態
+function check(btn) {
+    let p = btn.parentElement.parentElement
+    let isMail = p.querySelector("input[type='email']")
+    let isPsw = p.querySelector("input[type='password']")
+    let isMsg = p.querySelector('.alert')
+    let res
+    chkmail(isMail)
+    chkpsw(isPsw)
+
+    if ( !chk[0] || !chk[1] ) {
+        isMsg.classList.add('alert-danger')
+        isMsg.innerHTML = str.join('<br>') // 加入br換行
+        res = false
+    } else {
+        isMsg.classList.remove('alert-danger')
+        isMsg.innerHTML = ''
+        isMsg.classList = 'alert'
+        res = true
+    }
+    data = {
+        result: res,
+        mail: isMail.value,
+        psw: isPsw.value,
+        msg: isMsg
+    }
+    console.log(data)
+}
+
+// 啟動驗證並送出資料
+function active (e){
+    let t = e.target
+    str = []
+    if ( t == getElemt('#signUpBtn') ){
+        check(t)
+        if ( data.result ){
+            postAjax('signup')
+        } else {
+            return
+        }
+    } else if ( t == getElemt('#signInBtn') ){
+        check(t)
+        if ( data.result ){
+            postAjax('signin')
+        } else {
+            return
+        }
+    } else { return } 
+}
+
+signUp.addEventListener('click', active)
+signIn.addEventListener('click', active)
 
 
 
